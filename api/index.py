@@ -170,6 +170,9 @@ def fetch_realtime_context(zip_code):
 @app.route('/safecircle')
 @app.route('/telemetry')
 @app.route('/chat')
+@app.route('/trend-archive')
+@app.route('/atmospheric-intelligence')
+@app.route('/digital-twin')
 def serve_page():
     """Renders the core application layout supporting distinct page views."""
     return render_template('index.html')
@@ -354,7 +357,8 @@ def evaluate_region():
         "Incorporate the provided real-time NOAA alerts, FEMA Disaster declarations, and NASA EONET satellite data "
         "to formulate situational awareness and emergency protocols. "
         "Align assessments with standard safety framings inspired by FEMA and EPA advisory frameworks. "
-        "Structure your response elegantly using clear Markdown headers, bold accents, and distinct spacing."
+        "Structure your response elegantly using clear Markdown headers, bold accents, and distinct spacing. "
+        "Maintain a highly professional, authoritative tone without emojis."
     )
     
     user_query = (
@@ -415,7 +419,8 @@ def chat_advisory():
         "You are the Aegis Eco-Safety Advisory Chat Hub. You act as an interactive neighborhood safety monitor. "
         "Provide immediate, step-by-step micro-level resource saving and family preparation strategies. "
         "Ensure all guidance assumes a US municipal context (e.g., standard American Red Cross emergency kits). "
-        "Keep replies highly operational, punchy, concise, and structured with clean bullet points."
+        "Keep replies highly operational, punchy, concise, and structured with clean bullet points. "
+        "Avoid using emojis in your output to maintain a professional standard."
     )
 
     messages = [{"role": "system", "content": system_instruction}]
