@@ -94,11 +94,30 @@
             background-size: cover;
             background-position: center bottom;
         }
+
+        /* 3D Spinning Earth Animations */
+        @keyframes spinEarth {
+            0% { background-position: 0 0; }
+            100% { background-position: -800px 0; }
+        }
+
+        @keyframes spinClouds {
+            0% { background-position: 0 0; }
+            100% { background-position: -1200px 0; }
+        }
+
+        .animate-earth-spin {
+            animation: spinEarth 24s linear infinite;
+        }
+
+        .animate-cloud-spin {
+            animation: spinClouds 16s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-ivory-cream text-wild-berry font-body min-h-screen flex flex-col selection:bg-cool-mist/50 theme-transition">
 
-    <!-- Top Navigation Header -->
+    <!-- Top Navigation Header with Categorized Dropdowns -->
     <header id="mainHeader" class="w-full sticky top-0 z-50 py-4 bg-pure-white/90 backdrop-blur-md border-b-2 border-cool-mist/50 shadow-sm theme-transition">
         <div class="max-w-content mx-auto px-6 flex items-center justify-between">
             <a href="/" onclick="handleNavClick(event, '/')" class="flex items-center space-x-3 text-wild-berry no-underline">
@@ -110,13 +129,55 @@
             </a>
             
             <nav class="hidden lg:flex items-center space-x-6 text-xs font-black uppercase tracking-wider">
-                <a href="/" onclick="handleNavClick(event, '/')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Home</a>
-                <a href="/assessment" onclick="handleNavClick(event, '/assessment')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Assessment</a>
-                <a href="/preparedness" onclick="handleNavClick(event, '/preparedness')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Preparedness</a>
-                <a href="/dashboard" onclick="handleNavClick(event, '/dashboard')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Dashboard</a>
-                <a href="/safecircle" onclick="handleNavClick(event, '/safecircle')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Safe Circle</a>
-                <a href="/telemetry" onclick="handleNavClick(event, '/telemetry')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Telemetry</a>
-                <a href="/chat" onclick="handleNavClick(event, '/chat')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent">Advisory Chat</a>
+                <a href="/" onclick="handleNavClick(event, '/')" class="nav-link text-wild-berry hover:text-wild-berry/70 transition py-1 border-b-2 border-transparent">Home</a>
+                
+                <!-- Category 1: Assessment & Simulation -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-wild-berry hover:text-wild-berry/70 transition py-1 font-black cursor-pointer">
+                        <span>Assessment & Sim</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-1 w-56 bg-pure-white border-2 border-cool-mist/60 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto p-2 space-y-1">
+                        <a href="/assessment" onclick="handleNavClick(event, '/assessment')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Territory Assessment</a>
+                        <a href="/digital-twin" onclick="handleNavClick(event, '/digital-twin')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Earth Digital Twin</a>
+                    </div>
+                </div>
+
+                <!-- Category 2: Atmospheric & Environmental Analytics -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-wild-berry hover:text-wild-berry/70 transition py-1 font-black cursor-pointer">
+                        <span>Atmospheric Analytics</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-1 w-64 bg-pure-white border-2 border-cool-mist/60 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto p-2 space-y-1">
+                        <a href="/atmospheric-intelligence" onclick="handleNavClick(event, '/atmospheric-intelligence')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Atmospheric Intelligence</a>
+                        <a href="/trend-archive" onclick="handleNavClick(event, '/trend-archive')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Environmental Trend Archive</a>
+                    </div>
+                </div>
+
+                <!-- Category 3: Community Safety Network -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-wild-berry hover:text-wild-berry/70 transition py-1 font-black cursor-pointer">
+                        <span>Community Safety</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-1 w-60 bg-pure-white border-2 border-cool-mist/60 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto p-2 space-y-1">
+                        <a href="/safecircle" onclick="handleNavClick(event, '/safecircle')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Family & Contact Safe Circle</a>
+                        <a href="/dashboard" onclick="handleNavClick(event, '/dashboard')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Community Zip Dashboard & Forum</a>
+                    </div>
+                </div>
+
+                <!-- Category 4: Preparedness & Field Telemetry -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 text-wild-berry hover:text-wild-berry/70 transition py-1 font-black cursor-pointer">
+                        <span>Preparedness & Feeds</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-1 w-56 bg-pure-white border-2 border-cool-mist/60 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto p-2 space-y-1">
+                        <a href="/preparedness" onclick="handleNavClick(event, '/preparedness')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Preparedness Assistant</a>
+                        <a href="/telemetry" onclick="handleNavClick(event, '/telemetry')" class="block px-4 py-2.5 rounded-xl hover:bg-powder-blue/40 text-wild-berry font-black text-[11px] transition">Live Environmental Telemetry</a>
+                    </div>
+                </div>
             </nav>
 
             <div class="flex items-center space-x-3">
@@ -159,9 +220,8 @@
                         <a href="/assessment" onclick="handleNavClick(event, '/assessment')" class="bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream text-base font-extrabold px-9 py-4 rounded-full shadow-xl theme-transition no-underline border-2 border-pure-white/40 flex items-center space-x-2">
                             <span>Evaluate Your Region</span>
                         </a>
-                        <a href="/safecircle" onclick="handleNavClick(event, '/safecircle')" class="bg-pure-white hover:bg-powder-blue/40 text-wild-berry text-base font-bold px-9 py-4 rounded-full shadow-lg theme-transition no-underline flex items-center space-x-3 border-2 border-cool-mist backdrop-blur-md">
-                            <svg class="w-5 h-5 text-wild-berry" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            <span>Safety Circle</span>
+                        <a href="/digital-twin" onclick="handleNavClick(event, '/digital-twin')" class="bg-pure-white hover:bg-powder-blue/40 text-wild-berry text-base font-bold px-9 py-4 rounded-full shadow-lg theme-transition no-underline flex items-center space-x-3 border-2 border-cool-mist backdrop-blur-md">
+                            <span>Earth Digital Twin</span>
                         </a>
                     </div>
                 </div>
@@ -188,17 +248,18 @@
                 </div>
             </section>
 
-            <!-- Feature Showcase Links -->
+            <!-- Feature Showcase Links Grid -->
             <section class="py-20 bg-ivory-cream">
                 <div class="max-w-content mx-auto px-6 text-center space-y-4 mb-14">
                     <p class="text-xs font-black uppercase tracking-widest text-wild-berry">Actionable Ecosystem Tools</p>
                     <h3 class="font-display font-black italic text-title leading-snug max-w-2xl mx-auto text-wild-berry">Analyze, Prepare, & Preserve Your Environment</h3>
                 </div>
                 <div class="max-w-content mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
                     <div class="bg-pure-white text-wild-berry rounded-3xl p-8 shadow-xl border-2 border-cool-mist/50 flex flex-col justify-between hover:border-wild-berry transition">
                         <div>
-                            <div class="bg-powder-blue text-wild-berry w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black text-2xl">
-                                🗺️
+                            <div class="bg-powder-blue text-wild-berry w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
                             </div>
                             <h4 class="font-display font-black text-2xl mb-3 text-wild-berry">Threat Assessment</h4>
                             <p class="font-body text-card-body leading-relaxed mb-6 text-wild-berry/90 font-bold">Configure your unique regional profile and generate localized risk metrics.</p>
@@ -208,29 +269,31 @@
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" /></svg>
                         </a>
                     </div>
+                    <!-- Card 2 -->
                     <div class="bg-pure-white text-wild-berry rounded-3xl p-8 shadow-xl border-2 border-cool-mist/50 flex flex-col justify-between hover:border-wild-berry transition">
                         <div>
-                            <div class="bg-wild-berry text-ivory-cream w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black text-2xl">
-                                💬
+                            <div class="bg-wild-berry text-ivory-cream w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
-                            <h4 class="font-display font-black text-2xl mb-3 text-wild-berry">Advisory Chat Hub</h4>
-                            <p class="font-body text-card-body leading-relaxed mb-6 text-wild-berry/90 font-bold">Engage directly with our expert AI advisor on micro-level conservation and emergency prep.</p>
+                            <h4 class="font-display font-black text-2xl mb-3 text-wild-berry">Trend Archive</h4>
+                            <p class="font-body text-card-body leading-relaxed mb-6 text-wild-berry/90 font-bold">Historical database of satellite observations comparing long-term changes.</p>
                         </div>
-                        <a href="/chat" onclick="handleNavClick(event, '/chat')" class="text-xs font-black uppercase tracking-widest text-wild-berry hover:text-wild-berry/70 no-underline flex items-center space-x-2">
-                            <span>Consult Chat</span>
+                        <a href="/trend-archive" onclick="handleNavClick(event, '/trend-archive')" class="text-xs font-black uppercase tracking-widest text-wild-berry hover:text-wild-berry/70 no-underline flex items-center space-x-2">
+                            <span>Explore Archive</span>
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" /></svg>
                         </a>
                     </div>
+                    <!-- Card 3 -->
                     <div class="bg-pure-white text-wild-berry rounded-3xl p-8 shadow-xl border-2 border-cool-mist/50 flex flex-col justify-between hover:border-wild-berry transition">
                         <div>
-                            <div class="bg-powder-blue text-wild-berry w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black text-2xl">
-                                📡
+                            <div class="bg-powder-blue text-wild-berry w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shadow-md font-black">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
                             </div>
-                            <h4 class="font-display font-black text-2xl mb-3 text-wild-berry">Live Telemetry</h4>
-                            <p class="font-body text-card-body leading-relaxed mb-6 text-wild-berry/90 font-bold">Real-time status stream directly from NASA, NOAA, and OpenFEMA feeds.</p>
+                            <h4 class="font-display font-black text-2xl mb-3 text-wild-berry">Atmospheric Intelligence</h4>
+                            <p class="font-body text-card-body leading-relaxed mb-6 text-wild-berry/90 font-bold">Monitor heat domes, smoke plumes, dust storms, and atmospheric rivers.</p>
                         </div>
-                        <a href="/telemetry" onclick="handleNavClick(event, '/telemetry')" class="text-xs font-black uppercase tracking-widest text-wild-berry hover:text-wild-berry/70 no-underline flex items-center space-x-2">
-                            <span>View Feeds</span>
+                        <a href="/atmospheric-intelligence" onclick="handleNavClick(event, '/atmospheric-intelligence')" class="text-xs font-black uppercase tracking-widest text-wild-berry hover:text-wild-berry/70 no-underline flex items-center space-x-2">
+                            <span>View Intelligence</span>
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" /></svg>
                         </a>
                     </div>
@@ -253,7 +316,7 @@
                             <label for="zipCode" class="block text-xs font-black uppercase tracking-widest text-wild-berry">Target US 5-Digit Zip Code</label>
                             <input type="text" id="zipCode" name="zip_code" required maxlength="5" pattern="\d{5}"
                                 class="w-full bg-pure-white border-2 border-cool-mist/60 rounded-xl px-5 py-4 text-body font-bold text-wild-berry placeholder-wild-berry/40 focus:outline-none focus:ring-2 focus:ring-wild-berry transition"
-                                placeholder="e.g., 90210">
+                                placeholder="e.g., 94024">
                         </div>
                         <div class="space-y-3">
                             <label for="resourceUsage" class="block text-xs font-black uppercase tracking-widest text-wild-berry">Household Resource Footprint Level</label>
@@ -306,17 +369,259 @@
             </section>
         </div>
 
-        <!-- PAGE 3: PREPAREDNESS VIEW -->
+        <!-- PAGE 3: FEATURE 12 - ENVIRONMENTAL TREND ARCHIVE (Beneath Atmospheric Intelligence) -->
+        <div id="view-trend-archive" class="page-view">
+            <section class="py-16 bg-ivory-cream text-wild-berry border-b-2 border-cool-mist/40">
+                <div class="max-w-content mx-auto px-6 space-y-8">
+                    <div class="space-y-3">
+                        <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">Atmospheric & Environmental Analytics</span>
+                        <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Environmental Trend Archive</h2>
+                        <p class="text-base font-bold text-wild-berry/80 max-w-3xl">Understand long-term environmental change by comparing historical satellite observations across key indicators.</p>
+                    </div>
+
+                    <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs font-black uppercase text-wild-berry mb-2">Comparison Vector</label>
+                            <select id="trendVectorSelect" class="w-full bg-ivory-cream border-2 border-cool-mist/60 rounded-xl px-4 py-2.5 font-bold text-xs text-wild-berry focus:outline-none">
+                                <option value="month_vs_last_year">This Month vs. Last Year</option>
+                                <option value="reservoirs">Reservoir Changes</option>
+                                <option value="vegetation">Vegetation Health (NDVI Index)</option>
+                                <option value="wildfire">Wildfire Frequency Multi-Year</option>
+                                <option value="flood">Flood Recurrence & Inundation</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black uppercase text-wild-berry mb-2">Target Region Baseline</label>
+                            <input type="text" value="US Pacific Southwest (37.38°N, 122.08°W)" readonly class="w-full bg-oat-beige/40 border-2 border-cool-mist/40 rounded-xl px-4 py-2.5 font-bold text-xs text-wild-berry">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="renderTrendArchive()" class="w-full bg-wild-berry text-ivory-cream font-black text-xs py-3 rounded-xl shadow-md hover:bg-wild-berry/85 transition cursor-pointer">
+                                Query Historical Satellite Logs
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="trendDisplayContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-pure-white border-2 border-cool-mist/60 rounded-3xl p-8 shadow-xl space-y-4">
+                            <div class="flex justify-between items-center border-b-2 border-ivory-cream pb-3">
+                                <h4 class="font-display font-black text-xl text-wild-berry">Historical Baseline Log</h4>
+                                <span class="text-xs font-mono font-black text-wild-berry bg-powder-blue px-3 py-1 rounded-full">Archive T-365 Days</span>
+                            </div>
+                            <div class="h-48 bg-oat-beige/30 rounded-2xl border-2 border-cool-mist/40 flex items-center justify-center p-6 text-center">
+                                <div class="space-y-2">
+                                    <span class="text-3xl font-black block">72.4%</span>
+                                    <span class="text-xs font-bold text-wild-berry/80">Mean Satellite Reflectance Index (Historical Average)</span>
+                                </div>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80 leading-relaxed">
+                                Satellite multi-spectral imaging captured baseline soil saturation and water storage levels across the target US territory.
+                            </p>
+                        </div>
+
+                        <div class="bg-pure-white border-2 border-cool-mist/60 rounded-3xl p-8 shadow-xl space-y-4">
+                            <div class="flex justify-between items-center border-b-2 border-ivory-cream pb-3">
+                                <h4 class="font-display font-black text-xl text-wild-berry">Current Observation Delta</h4>
+                                <span class="text-xs font-mono font-black text-wild-berry bg-rose-taupe px-3 py-1 rounded-full">Live Observation</span>
+                            </div>
+                            <div class="h-48 bg-rose-taupe/30 rounded-2xl border-2 border-cool-mist/40 flex items-center justify-center p-6 text-center">
+                                <div class="space-y-2">
+                                    <span class="text-3xl font-black block text-wild-berry">58.1% (-14.3%)</span>
+                                    <span class="text-xs font-bold text-wild-berry/80">Current Satellite Observation Delta</span>
+                                </div>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80 leading-relaxed">
+                                Recent orbital telemetry reveals accelerated moisture depletion in reservoirs and lower canopy vegetation indices compared to prior seasonal cycles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 4: FEATURE 8 - ATMOSPHERIC INTELLIGENCE -->
+        <div id="view-atmospheric-intelligence" class="page-view">
+            <section class="py-16 bg-pure-white text-wild-berry border-b-2 border-cool-mist/30">
+                <div class="max-w-content mx-auto px-6 space-y-8">
+                    <div class="space-y-3">
+                        <span class="inline-block bg-powder-blue/80 text-wild-berry border border-cool-mist text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">Atmospheric & Environmental Analytics</span>
+                        <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Atmospheric Intelligence</h2>
+                        <p class="text-base font-bold text-wild-berry/80 max-w-3xl">Monitor atmospheric conditions that contribute to severe environmental disasters using weather satellites.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Heat Domes</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Thermal</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">High-pressure atmospheric ridges trapping extreme thermal energy over target US regions.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>Upper Pressure:</span> <span class="font-black">Nominal High</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Smoke Plumes</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Particulate</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">Tracking airborne particulate matter and aerosol optical depth from active wildfires.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>AOD Index:</span> <span class="font-black">0.18 (Low Dispersion)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Dust Storms</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Arid</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">Monitoring arid topsoil displacement and wind-driven particulate transport corridors.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>Surface Winds:</span> <span class="font-black">12 mph WNW</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Atmospheric Rivers</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Precipitation</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">Narrow bands of concentrated water vapor capable of delivering extreme precipitation.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>IWV Stream:</span> <span class="font-black">Clear / Off-Season</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Humidity Dynamics</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Moisture</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">Relative air moisture saturation levels critical for vegetation ignition risk.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>Relative Humidity:</span> <span class="font-black">44%</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 shadow-md space-y-3">
+                            <div class="flex items-center justify-between border-b-2 border-cool-mist/40 pb-2">
+                                <span class="font-black text-xs uppercase tracking-wider text-wild-berry">Wind Behavior</span>
+                                <span class="text-xs font-black bg-wild-berry text-ivory-cream px-2 py-0.5 rounded">Velocity</span>
+                            </div>
+                            <p class="text-xs font-bold text-wild-berry/80">3D anemometric modeling and gust velocity profiles from geostationary satellites.</p>
+                            <div class="bg-pure-white p-3 rounded-xl border border-cool-mist/40 text-xs font-bold flex justify-between">
+                                <span>Gust Velocity:</span> <span class="font-black">18 mph Peak</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 5: FEATURE 2 - EARTH DIGITAL TWIN (With 3D Animated Spinning Globe) -->
+        <div id="view-digital-twin" class="page-view">
+            <section class="py-16 bg-ivory-cream text-wild-berry border-b-2 border-cool-mist/40">
+                <div class="max-w-content mx-auto px-6 space-y-8">
+                    <div class="space-y-3">
+                        <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">Assessment & Digital Twin</span>
+                        <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Earth Digital Twin</h2>
+                        <p class="text-base font-bold text-wild-berry/80 max-w-3xl">Simulate environmental changes before they happen. Build a dynamic virtual model updated continuously via satellite observations.</p>
+                    </div>
+
+                    <!-- Simulation Canvas with Real-Time 3D Animated Earth Sphere -->
+                    <div class="bg-pure-white border-2 border-cool-mist/60 rounded-3xl p-8 shadow-2xl space-y-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2 border-ivory-cream pb-4">
+                            <div>
+                                <h4 class="font-display font-black text-2xl text-wild-berry">Disaster Evolution Simulator</h4>
+                                <p class="text-xs font-bold text-wild-berry/70">Predict potential disaster growth under variable atmospheric conditions</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label class="text-xs font-black uppercase text-wild-berry">Sim Scenario:</label>
+                                <select id="twinScenarioSelect" onchange="updateDigitalTwinScenario()" class="bg-ivory-cream border-2 border-cool-mist/60 rounded-xl px-3 py-1.5 text-xs font-black text-wild-berry">
+                                    <option value="wildfire">Wildfire Spread</option>
+                                    <option value="flood">Flood Expansion</option>
+                                    <option value="reservoir">Reservoir Depletion</option>
+                                    <option value="coastal">Coastal Erosion</option>
+                                    <option value="drought">Drought Progression</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3D Animated Globe Viewport -->
+                        <div class="relative bg-wild-berry rounded-2xl p-8 text-ivory-cream min-h-[420px] flex flex-col justify-between overflow-hidden shadow-inner border-2 border-cool-mist">
+                            <div class="flex justify-between items-center text-xs font-mono font-bold text-cool-mist z-10">
+                                <span>MODEL: DIGITAL-TWIN-3D-GLOBE-v5</span>
+                                <span id="twinTimelineLabel">TIMESTAMP: T + 0 Hours (Baseline)</span>
+                            </div>
+
+                            <!-- Spinning 3D Globe Visual Element -->
+                            <div class="my-6 text-center space-y-4 z-10">
+                                <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto flex items-center justify-center">
+                                    <!-- Atmosphere Outer Glow -->
+                                    <div class="absolute inset-0 rounded-full bg-powder-blue/30 blur-xl animate-pulse"></div>
+                                    
+                                    <!-- 3D Earth Globe Sphere -->
+                                    <div id="earthSphere" class="relative w-full h-full rounded-full overflow-hidden border-2 border-cool-mist/70 shadow-2xl transition-transform duration-700" 
+                                         style="background: radial-gradient(circle at 30% 30%, #5a7d9a 0%, #1f2d3d 70%, #0d1520 100%); box-shadow: inset -30px -30px 50px rgba(0,0,0,0.7), inset 15px 15px 30px rgba(255,255,255,0.3), 0 0 30px rgba(189,197,207,0.4);">
+                                        
+                                        <!-- Rotating Continent Texture Layer -->
+                                        <div class="absolute inset-0 w-[200%] h-full opacity-85 animate-earth-spin" 
+                                             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\' viewBox=\'0 0 800 400\'><path fill=\'%23E3E0CF\' d=\'M150,80 Q180,60 220,90 T280,120 T200,180 T130,120 Z M350,180 Q400,160 450,200 T480,280 T400,320 T330,240 Z M520,70 Q580,50 640,90 T680,150 T600,180 T530,120 Z M50,250 Q90,220 140,260 T160,330 T100,360 T40,300 Z M650,250 Q700,220 750,270 T780,340 T700,370 Z\'/></svg>'); background-size: 50% 100%;"></div>
+                                        
+                                        <!-- Atmospheric Cloud Layer -->
+                                        <div class="absolute inset-0 w-[200%] h-full opacity-45 mix-blend-screen animate-cloud-spin" 
+                                             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\' viewBox=\'0 0 800 400\'><path fill=\'%23FFFFFF\' opacity=\'0.7\' d=\'M80,40 Q140,20 200,50 T300,40 T220,80 Z M400,120 Q480,100 550,130 T600,170 T480,160 Z M100,280 Q180,260 260,300 T320,330 T200,350 Z M500,300 Q580,280 660,320 T720,350 Z\'/></svg>'); background-size: 50% 100%;"></div>
+
+                                        <!-- Pulse Heat Overlay -->
+                                        <div id="twinGlobeOverlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                            <div id="twinPulseRing" class="w-16 h-16 rounded-full border-2 border-rose-taupe bg-wild-berry/40 animate-ping"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Orbital Satellite Marker Badge -->
+                                    <div class="absolute -top-2 left-10 bg-pure-white/90 text-wild-berry border border-cool-mist px-3 py-1 rounded-full text-[10px] font-mono font-black shadow-md">
+                                        ORBIT: GEOS-18 SYNC
+                                    </div>
+                                </div>
+
+                                <p id="twinStatusDescription" class="text-sm font-bold text-ivory-cream max-w-xl mx-auto pt-2">
+                                    Initial ignition detected. Boundary containment at 85%. Normal wind conditions.
+                                </p>
+                            </div>
+
+                            <!-- Animation Control Bar -->
+                            <div class="z-10 bg-pure-white/10 backdrop-blur-md p-4 rounded-xl border border-cool-mist/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div class="flex items-center space-x-3">
+                                    <button id="twinPlayBtn" onclick="toggleTwinAnimation()" class="bg-ivory-cream hover:bg-pure-white text-wild-berry font-black text-xs px-5 py-2.5 rounded-lg shadow-md transition cursor-pointer">
+                                        Play Simulation
+                                    </button>
+                                    <button onclick="resetTwinAnimation()" class="bg-rose-taupe/40 hover:bg-rose-taupe text-wild-berry font-black text-xs px-4 py-2.5 rounded-lg transition cursor-pointer">
+                                        Reset
+                                    </button>
+                                </div>
+                                <div class="flex items-center space-x-3 w-full sm:w-1/2">
+                                    <span class="text-xs font-mono font-bold text-cool-mist">T+0h</span>
+                                    <input type="range" id="twinSlider" min="0" max="3" step="1" value="0" oninput="setTwinStep(this.value)" class="w-full accent-cool-mist cursor-pointer">
+                                    <span class="text-xs font-mono font-bold text-cool-mist">T+72h</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 6: PREPAREDNESS VIEW -->
         <div id="view-preparedness" class="page-view">
             <section class="py-16 bg-ivory-cream text-wild-berry border-b-2 border-cool-mist/40">
                 <div class="max-w-content mx-auto px-6 space-y-8">
                     <div class="text-center space-y-3">
-                        <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">Actionable Safety Guidance</span>
+                        <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">Preparedness & Field Telemetry</span>
                         <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Recommendation & Preparedness Assistant</h2>
                         <p class="text-base font-bold text-wild-berry/80 max-w-2xl mx-auto">Transform hazard predictions into practical household actions tailored to your local environment.</p>
                     </div>
 
-                    <!-- Options Bar -->
                     <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-md">
                         <div class="flex items-center space-x-3 text-xs font-black">
                             <span class="text-wild-berry/80">Personalization Level:</span>
@@ -341,31 +646,29 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                        <!-- Category Buttons -->
                         <div class="space-y-3">
                             <button onclick="switchPrepCategory('water')" class="prep-cat-btn w-full text-left px-6 py-4 rounded-xl font-black text-sm transition flex items-center justify-between bg-wild-berry text-ivory-cream shadow-md cursor-pointer" data-cat="water">
-                                <span>💧 Water Conservation</span>
+                                <span>Water Conservation</span>
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                             </button>
                             <button onclick="switchPrepCategory('wildfire')" class="prep-cat-btn w-full text-left px-6 py-4 rounded-xl font-black text-sm transition flex items-center justify-between bg-pure-white text-wild-berry border-2 border-cool-mist/40 hover:bg-powder-blue/30 cursor-pointer" data-cat="wildfire">
-                                <span>🔥 Wildfire Home Prep</span>
+                                <span>Wildfire Home Prep</span>
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                             </button>
                             <button onclick="switchPrepCategory('flood')" class="prep-cat-btn w-full text-left px-6 py-4 rounded-xl font-black text-sm transition flex items-center justify-between bg-pure-white text-wild-berry border-2 border-cool-mist/40 hover:bg-powder-blue/30 cursor-pointer" data-cat="flood">
-                                <span>🌊 Flood Readiness</span>
+                                <span>Flood Readiness</span>
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                             </button>
                             <button onclick="switchPrepCategory('energy')" class="prep-cat-btn w-full text-left px-6 py-4 rounded-xl font-black text-sm transition flex items-center justify-between bg-pure-white text-wild-berry border-2 border-cool-mist/40 hover:bg-powder-blue/30 cursor-pointer" data-cat="energy">
-                                <span>⚡ Energy-Saving Measures</span>
+                                <span>Energy-Saving Measures</span>
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                             </button>
                             <button onclick="switchPrepCategory('smarthome')" class="prep-cat-btn w-full text-left px-6 py-4 rounded-xl font-black text-sm transition flex items-center justify-between bg-pure-white text-wild-berry border-2 border-cool-mist/40 hover:bg-powder-blue/30 cursor-pointer" data-cat="smarthome">
-                                <span>🏠 Smart Home Automation</span>
+                                <span>Smart Home Automation</span>
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                             </button>
                         </div>
 
-                        <!-- Checklist Display -->
                         <div class="lg:col-span-2 bg-pure-white border-2 border-cool-mist/50 rounded-3xl p-8 shadow-xl min-h-[380px]">
                             <div id="prepContentBox">
                                 <!-- Injected dynamically by JS -->
@@ -376,13 +679,13 @@
             </section>
         </div>
 
-        <!-- PAGE 4: DASHBOARD VIEW -->
+        <!-- PAGE 7: DASHBOARD VIEW (Beneath Safe Circle in Category Hierarchy) -->
         <div id="view-dashboard" class="page-view">
             <section class="py-16 bg-pure-white text-wild-berry border-b-2 border-cool-mist/30">
                 <div class="max-w-content mx-auto px-6 space-y-8">
                     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b-2 border-ivory-cream pb-6">
                         <div class="space-y-2">
-                            <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">Real-Time Risk Monitoring</span>
+                            <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">Community Safety Network</span>
                             <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Smart Community Dashboard</h2>
                         </div>
                         <div class="flex items-center space-x-3 text-xs font-black">
@@ -395,7 +698,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                        <!-- Hazard Map Simulation -->
                         <div class="lg:col-span-8 bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-lg">
                             <div class="flex justify-between items-center z-10">
                                 <div>
@@ -430,7 +732,6 @@
                             </div>
                         </div>
 
-                        <!-- Environmental Health Bars -->
                         <div class="lg:col-span-4 bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-6 space-y-6 shadow-lg">
                             <h4 class="font-display font-black italic text-2xl text-wild-berry">Environmental Health</h4>
                             <div class="space-y-5">
@@ -474,28 +775,76 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Zip Code Neighborhood Group Forum Section -->
+                    <div class="bg-ivory-cream border-2 border-cool-mist/60 rounded-3xl p-8 shadow-xl space-y-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-2 border-cool-mist/40 pb-5">
+                            <div>
+                                <h4 class="font-display font-black italic text-2xl text-wild-berry">Neighborhood Zip Code Forum</h4>
+                                <p class="text-xs font-bold text-wild-berry/70">Connect, communicate, and share local updates with residents in your specific Zip Code</p>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-pure-white border-2 border-cool-mist/60 p-2 rounded-2xl shadow-sm">
+                                <span class="text-xs font-black uppercase text-wild-berry pl-2">Zip Group:</span>
+                                <input type="text" id="zipGroupInput" maxlength="5" pattern="\d{5}" value="94024" class="w-20 bg-ivory-cream border border-cool-mist font-mono font-black text-center text-xs py-1.5 rounded-lg text-wild-berry focus:outline-none focus:ring-2 focus:ring-wild-berry">
+                                <button onclick="changeZipCodeGroup()" class="bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream font-black text-xs px-4 py-1.5 rounded-lg transition cursor-pointer">
+                                    Join Group
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-4 bg-pure-white/80 p-4 rounded-2xl border border-cool-mist/50">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-3 h-3 rounded-full bg-wild-berry animate-pulse"></span>
+                                <span class="text-xs font-black uppercase tracking-wider text-wild-berry">Active Group Channel:</span>
+                                <span id="activeGroupBadge" class="bg-powder-blue text-wild-berry text-xs font-black font-mono px-3 py-1 rounded-full border border-cool-mist">ZIP 94024</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-xs font-black">
+                                <span class="text-wild-berry/70">Feed Filter:</span>
+                                <button id="filterCurrentZipBtn" onclick="setFeedFilter('current')" class="px-3 py-1.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer">My Zip Code Only</button>
+                                <button id="filterAllZipBtn" onclick="setFeedFilter('all')" class="px-3 py-1.5 rounded-lg text-wild-berry hover:bg-powder-blue/40 transition cursor-pointer">All Regional Groups</button>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handlePostCommunityNews(event)" class="bg-pure-white p-6 rounded-2xl border-2 border-cool-mist/50 space-y-4 shadow-sm">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <input type="text" id="postTitleInput" required placeholder="Notice Title / Headline..." class="bg-ivory-cream border-2 border-cool-mist/60 rounded-xl px-4 py-2.5 text-xs font-bold text-wild-berry focus:outline-none focus:ring-2 focus:ring-wild-berry">
+                                <select id="postCategoryInput" class="bg-ivory-cream border-2 border-cool-mist/60 rounded-xl px-4 py-2.5 text-xs font-bold text-wild-berry focus:outline-none focus:ring-2 focus:ring-wild-berry">
+                                    <option value="Safety Notice">Safety Notice</option>
+                                    <option value="Resource Exchange">Resource Exchange</option>
+                                    <option value="Infrastructure Update">Infrastructure Update</option>
+                                    <option value="General News">General News</option>
+                                </select>
+                                <button type="submit" class="bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream font-black text-xs py-2.5 rounded-xl shadow-md transition cursor-pointer">
+                                    Publish to Zip Group
+                                </button>
+                            </div>
+                            <textarea id="postContentInput" required rows="2" placeholder="Share news or safety updates with residents in this Zip Code group..." class="w-full bg-ivory-cream border-2 border-cool-mist/60 rounded-xl p-4 text-xs font-bold text-wild-berry focus:outline-none focus:ring-2 focus:ring-wild-berry"></textarea>
+                        </form>
+
+                        <div id="communityFeedList" class="space-y-4">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
 
-        <!-- PAGE 5: SAFE CIRCLE VIEW -->
+        <!-- PAGE 8: SAFE CIRCLE VIEW -->
         <div id="view-safecircle" class="page-view">
             <section class="py-16 bg-ivory-cream text-wild-berry border-b-2 border-cool-mist/40">
                 <div class="max-w-content mx-auto px-6 space-y-8">
                     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                         <div class="space-y-2">
-                            <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">Connected Safety Network</span>
+                            <span class="inline-block bg-wild-berry text-ivory-cream text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">Community Safety Network</span>
                             <h2 class="font-display font-black italic text-title leading-snug text-wild-berry">Family & Community Safe Circle</h2>
-                            <p class="text-base font-bold text-wild-berry/80 max-w-2xl">Coordinate instantly with your loved ones and neighbors during emergency events.</p>
+                            <p class="text-base font-bold text-wild-berry/80 max-w-2xl">Manage family contacts and optional neighborhood ties. Members are added explicitly by you.</p>
                         </div>
 
                         <div class="flex flex-wrap items-center gap-4">
-                            <div class="bg-pure-white border-2 border-cool-mist/50 rounded-xl p-1.5 flex text-xs font-black shadow-sm">
-                                <button id="groupFamilyBtn" onclick="switchSafeCircleGroup('family')" class="px-5 py-2.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer">Family Circle (4/10)</button>
-                                <button id="groupNeighborsBtn" onclick="switchSafeCircleGroup('neighbors')" class="px-5 py-2.5 rounded-lg text-wild-berry hover:bg-ivory-cream transition cursor-pointer">Neighborhood (12/25)</button>
-                            </div>
-                            <button id="imSafeBtn" onclick="triggerImSafeAction()" class="bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream font-black text-xs uppercase tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition flex items-center space-x-2 cursor-pointer border-2 border-pure-white/20">
-                                <svg class="w-5 h-5 text-cool-mist" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <button onclick="openAddMemberModal()" class="bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg transition flex items-center space-x-2 cursor-pointer border-2 border-pure-white/20">
+                                <span>+ Add Contact to Circle</span>
+                            </button>
+                            <button id="imSafeBtn" onclick="triggerImSafeAction()" class="bg-pure-white hover:bg-powder-blue/40 text-wild-berry font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-md transition flex items-center space-x-2 cursor-pointer border-2 border-cool-mist">
                                 <span>Mark "I'm Safe"</span>
                             </button>
                         </div>
@@ -504,91 +853,25 @@
                     <div id="safeCircleAlertBanner" class="bg-powder-blue/60 border-2 border-cool-mist p-5 rounded-2xl flex items-center justify-between text-xs text-wild-berry font-bold shadow-sm">
                         <div class="flex items-center space-x-3">
                             <span class="w-3 h-3 rounded-full bg-wild-berry animate-ping"></span>
-                            <span class="font-black">Circle Status Normal:</span>
-                            <span>All 4 family members reported safe within the last 12 hours.</span>
+                            <span class="font-black">Circle Status Operational:</span>
+                            <span id="circleCountSummary">0 Family Members, 0 Neighbors configured in your circle.</span>
                         </div>
-                        <span class="text-xs font-black text-wild-berry/70">Live GPS Sharing: Enabled</span>
+                        <span class="text-xs font-black text-wild-berry/70">Private Circle Encryption: Active</span>
                     </div>
 
-                    <div id="circleMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-11 h-11 rounded-full bg-wild-berry text-ivory-cream font-black flex items-center justify-center font-display text-lg">S</div>
-                                    <div>
-                                        <h4 class="font-black text-base text-wild-berry">Sara</h4>
-                                        <p class="text-xs font-bold text-wild-berry/60">Daughter</p>
-                                    </div>
-                                </div>
-                                <span class="bg-powder-blue text-wild-berry text-xs font-black px-3 py-1 rounded-full border border-cool-mist">SAFE</span>
-                            </div>
-                            <div class="text-xs font-bold text-wild-berry/80 space-y-1.5 border-t-2 border-ivory-cream pt-3">
-                                <div class="flex justify-between"><span>Location:</span> <span class="font-black text-wild-berry">High School</span></div>
-                                <div class="flex justify-between"><span>Last Check-In:</span> <span class="font-black text-wild-berry">10 mins ago</span></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-11 h-11 rounded-full bg-wild-berry text-ivory-cream font-black flex items-center justify-center font-display text-lg">A</div>
-                                    <div>
-                                        <h4 class="font-black text-base text-wild-berry">Anishka</h4>
-                                        <p class="text-xs font-bold text-wild-berry/60">Daughter</p>
-                                    </div>
-                                </div>
-                                <span class="bg-powder-blue text-wild-berry text-xs font-black px-3 py-1 rounded-full border border-cool-mist">SAFE</span>
-                            </div>
-                            <div class="text-xs font-bold text-wild-berry/80 space-y-1.5 border-t-2 border-ivory-cream pt-3">
-                                <div class="flex justify-between"><span>Location:</span> <span class="font-black text-wild-berry">Home</span></div>
-                                <div class="flex justify-between"><span>Last Check-In:</span> <span class="font-black text-wild-berry">1 hour ago</span></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-11 h-11 rounded-full bg-wild-berry text-ivory-cream font-black flex items-center justify-center font-display text-lg">S</div>
-                                    <div>
-                                        <h4 class="font-black text-base text-wild-berry">Shivani</h4>
-                                        <p class="text-xs font-bold text-wild-berry/60">Spouse</p>
-                                    </div>
-                                </div>
-                                <span class="bg-powder-blue text-wild-berry text-xs font-black px-3 py-1 rounded-full border border-cool-mist">SAFE</span>
-                            </div>
-                            <div class="text-xs font-bold text-wild-berry/80 space-y-1.5 border-t-2 border-ivory-cream pt-3">
-                                <div class="flex justify-between"><span>Location:</span> <span class="font-black text-wild-berry">Los Altos Center</span></div>
-                                <div class="flex justify-between"><span>Last Check-In:</span> <span class="font-black text-wild-berry">25 mins ago</span></div>
-                            </div>
-                        </div>
-
-                        <div id="userMemberCard" class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-11 h-11 rounded-full bg-rose-taupe text-wild-berry font-black flex items-center justify-center font-display text-xs">YOU</div>
-                                    <div>
-                                        <h4 class="font-black text-base text-wild-berry">You (Primary)</h4>
-                                        <p class="text-xs font-bold text-wild-berry/60">Admin</p>
-                                    </div>
-                                </div>
-                                <span id="userStatusBadge" class="bg-powder-blue text-wild-berry text-xs font-black px-3 py-1 rounded-full border border-cool-mist">SAFE</span>
-                            </div>
-                            <div class="text-xs font-bold text-wild-berry/80 space-y-1.5 border-t-2 border-ivory-cream pt-3">
-                                <div class="flex justify-between"><span>Location:</span> <span class="font-black text-wild-berry">Current GPS</span></div>
-                                <div class="flex justify-between"><span>Last Check-In:</span> <span id="userCheckinTime" class="font-black text-wild-berry">Just now</span></div>
-                            </div>
-                        </div>
+                    <div id="circleMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Injected dynamically -->
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- PAGE 6: TELEMETRY VIEW -->
+        <!-- PAGE 9: TELEMETRY VIEW (Beneath Preparedness in Category Hierarchy) -->
         <div id="view-telemetry" class="page-view">
             <section class="py-16 bg-pure-white text-wild-berry border-b-2 border-cool-mist/30">
                 <div class="max-w-content mx-auto px-6 space-y-6">
                     <div class="border-b-2 border-cool-mist/40 pb-4">
-                        <span class="inline-block bg-powder-blue/70 text-wild-berry text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider mb-2">Live Open Data</span>
+                        <span class="inline-block bg-powder-blue/70 text-wild-berry text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider mb-2">Preparedness & Field Telemetry</span>
                         <h2 class="font-display font-black italic text-title text-wild-berry">Live Environmental Telemetry Feeds</h2>
                         <p class="text-sm font-bold text-wild-berry/70 mt-1">Directly connected to federal weather, disaster, and NASA event streams.</p>
                     </div>
@@ -628,7 +911,7 @@
             </section>
         </div>
 
-        <!-- PAGE 7: CHAT VIEW -->
+        <!-- PAGE 10: CHAT VIEW -->
         <div id="view-chat" class="page-view">
             <section class="py-16 bg-ivory-cream text-wild-berry border-b-2 border-cool-mist/40">
                 <div class="max-w-content mx-auto px-6 mb-8 text-center space-y-3">
@@ -687,6 +970,44 @@
             </div>
         </div>
     </footer>
+
+    <!-- ADD MEMBER TO SAFE CIRCLE MODAL -->
+    <div id="addMemberModal" class="fixed inset-0 z-50 flex items-center justify-center bg-wild-berry/70 backdrop-blur-md hidden animate-fadeIn">
+        <div class="bg-ivory-cream text-wild-berry border-2 border-cool-mist rounded-3xl shadow-2xl w-full max-w-md p-8 relative">
+            <button onclick="closeAddMemberModal()" class="absolute top-5 right-5 text-wild-berry/60 hover:text-wild-berry text-2xl font-black cursor-pointer">&times;</button>
+            
+            <div class="text-center space-y-2 mb-6">
+                <div class="inline-flex bg-wild-berry text-ivory-cream text-xl font-black font-display w-12 h-12 rounded-xl items-center justify-center mb-1 shadow-md">AΩ</div>
+                <h3 class="font-display font-black italic text-3xl text-wild-berry">Add Contact</h3>
+                <p class="text-xs font-bold text-wild-berry/70">Add a family member or neighbor to your active circle</p>
+            </div>
+
+            <form onsubmit="handleSaveMember(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-black uppercase tracking-wider text-wild-berry">Contact Name</label>
+                    <input type="text" id="memberNameInput" required class="w-full bg-pure-white border-2 border-cool-mist/60 rounded-xl px-4 py-3 text-xs font-bold text-wild-berry placeholder-wild-berry/40 focus:outline-none focus:ring-2 focus:ring-wild-berry" placeholder="Full Name">
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-black uppercase tracking-wider text-wild-berry">Circle Group</label>
+                    <select id="memberGroupInput" class="w-full bg-pure-white border-2 border-cool-mist/60 rounded-xl px-4 py-3 text-xs font-bold text-wild-berry focus:outline-none focus:ring-2 focus:ring-wild-berry">
+                        <option value="Family">Family Member</option>
+                        <option value="Neighbor">Neighbor Contact (Optional)</option>
+                    </select>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-black uppercase tracking-wider text-wild-berry">Relationship / Role</label>
+                    <input type="text" id="memberRoleInput" required class="w-full bg-pure-white border-2 border-cool-mist/60 rounded-xl px-4 py-3 text-xs font-bold text-wild-berry placeholder-wild-berry/40 focus:outline-none focus:ring-2 focus:ring-wild-berry" placeholder="e.g. Spouse, Parent, Block Captain">
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-black uppercase tracking-wider text-wild-berry">Primary Location</label>
+                    <input type="text" id="memberLocInput" required class="w-full bg-pure-white border-2 border-cool-mist/60 rounded-xl px-4 py-3 text-xs font-bold text-wild-berry placeholder-wild-berry/40 focus:outline-none focus:ring-2 focus:ring-wild-berry" placeholder="e.g. Home, Work, Local District">
+                </div>
+                <button type="submit" class="w-full bg-wild-berry hover:bg-wild-berry/85 text-ivory-cream font-black text-xs py-3.5 rounded-xl shadow-lg transition cursor-pointer mt-2 border-2 border-pure-white/20">
+                    Add Member to Safe Circle
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- AUTHENTICATION MODAL -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-wild-berry/70 backdrop-blur-md hidden animate-fadeIn">
@@ -748,10 +1069,52 @@
         let supabaseClient = null;
         let activeAuthMode = 'login';
         let currentUser = null;
+        let twinAnimationTimer = null;
+
+        // Active Zip Code Group State
+        let activeZipGroup = "94024";
+        let activeFeedFilter = "current";
+
+        // Dynamic Safe Circle User Array
+        let userSafeCircle = [];
+
+        // Sample Community Posts Array
+        let communityPosts = [
+            {
+                id: 1,
+                zipCode: "94024",
+                author: "District Safety Officer",
+                category: "Infrastructure Update",
+                title: "Water Main Pressure Maintenance Scheduled",
+                content: "Municipal water grid maintenance scheduled for tomorrow between 08:00 and 11:00 AM PST. Water reserves in Zip Code 94024 remain nominal.",
+                timestamp: "2 hours ago"
+            },
+            {
+                id: 2,
+                zipCode: "94024",
+                author: "Neighborhood Watch Lead",
+                category: "Safety Notice",
+                title: "Wildfire Fuel Clearance Inspection",
+                content: "Defensible space checks completed for West District perimeter in 94024. All residents encouraged to review household emergency kits.",
+                timestamp: "5 hours ago"
+            },
+            {
+                id: 3,
+                zipCode: "90210",
+                author: "Community Liaison",
+                category: "General News",
+                title: "Local Solar Grid Expansion Project",
+                content: "Phase 1 solar microgrid installation approved for the 90210 neighborhood corridor.",
+                timestamp: "1 day ago"
+            }
+        ];
 
         const routesMap = {
             '/': 'view-home',
             '/assessment': 'view-assessment',
+            '/trend-archive': 'view-trend-archive',
+            '/atmospheric-intelligence': 'view-atmospheric-intelligence',
+            '/digital-twin': 'view-digital-twin',
             '/preparedness': 'view-preparedness',
             '/dashboard': 'view-dashboard',
             '/safecircle': 'view-safecircle',
@@ -772,12 +1135,11 @@
                 targetView.classList.add('active');
             }
 
-            // Update Nav Active Indicator
             document.querySelectorAll('.nav-link').forEach(link => {
                 if (link.getAttribute('href') === path) {
-                    link.className = "nav-link text-wild-berry border-b-2 border-wild-berry transition py-2 font-black";
+                    link.className = "nav-link text-wild-berry border-b-2 border-wild-berry transition py-1 font-black";
                 } else {
-                    link.className = "nav-link text-wild-berry hover:text-wild-berry/70 transition py-2 border-b-2 border-transparent";
+                    link.className = "nav-link text-wild-berry hover:text-wild-berry/70 transition py-1 border-b-2 border-transparent";
                 }
             });
 
@@ -793,6 +1155,281 @@
         window.addEventListener('popstate', () => {
             navigateTo(window.location.pathname);
         });
+
+        // Zip Code Group Switcher
+        function changeZipCodeGroup() {
+            const input = document.getElementById('zipGroupInput');
+            const val = input.value.trim();
+            if (!/^\d{5}$/.test(val)) {
+                alert("Please enter a valid 5-digit US Zip Code.");
+                return;
+            }
+            activeZipGroup = val;
+            document.getElementById('activeGroupBadge').innerText = `ZIP ${activeZipGroup}`;
+            renderCommunityFeed();
+        }
+
+        function setFeedFilter(mode) {
+            activeFeedFilter = mode;
+            const currentBtn = document.getElementById('filterCurrentZipBtn');
+            const allBtn = document.getElementById('filterAllZipBtn');
+
+            if (mode === 'current') {
+                currentBtn.className = "px-3 py-1.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer";
+                allBtn.className = "px-3 py-1.5 rounded-lg text-wild-berry hover:bg-powder-blue/40 transition cursor-pointer";
+            } else {
+                allBtn.className = "px-3 py-1.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer";
+                currentBtn.className = "px-3 py-1.5 rounded-lg text-wild-berry hover:bg-powder-blue/40 transition cursor-pointer";
+            }
+
+            renderCommunityFeed();
+        }
+
+        // Safe Circle Member Management Logic
+        function openAddMemberModal() {
+            document.getElementById('addMemberModal').classList.remove('hidden');
+        }
+
+        function closeAddMemberModal() {
+            document.getElementById('addMemberModal').classList.add('hidden');
+        }
+
+        function handleSaveMember(e) {
+            e.preventDefault();
+            const name = document.getElementById('memberNameInput').value.trim();
+            const group = document.getElementById('memberGroupInput').value;
+            const role = document.getElementById('memberRoleInput').value.trim();
+            const loc = document.getElementById('memberLocInput').value.trim();
+
+            if (!name || !role || !loc) return;
+
+            const newMember = {
+                id: Date.now(),
+                name,
+                group,
+                role,
+                location: loc,
+                status: "SAFE",
+                lastCheckin: "Just now"
+            };
+
+            userSafeCircle.push(newMember);
+            closeAddMemberModal();
+            
+            document.getElementById('memberNameInput').value = '';
+            document.getElementById('memberRoleInput').value = '';
+            document.getElementById('memberLocInput').value = '';
+
+            renderSafeCircleMembers();
+        }
+
+        function removeMember(memberId) {
+            userSafeCircle = userSafeCircle.filter(m => m.id !== memberId);
+            renderSafeCircleMembers();
+        }
+
+        function renderSafeCircleMembers() {
+            const grid = document.getElementById('circleMembersGrid');
+            const summary = document.getElementById('circleCountSummary');
+
+            const famCount = userSafeCircle.filter(m => m.group === 'Family').length;
+            const neighCount = userSafeCircle.filter(m => m.group === 'Neighbor').length;
+
+            if (summary) {
+                summary.innerText = `${famCount} Family Members, ${neighCount} Neighbors configured in your circle.`;
+            }
+
+            if (userSafeCircle.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-8 text-center space-y-3 shadow-sm">
+                        <p class="font-black text-sm text-wild-berry">No Contacts Added to Your Safe Circle Yet</p>
+                        <p class="text-xs font-bold text-wild-berry/70 max-w-md mx-auto">Click "Add Contact to Circle" above to manually register your family members or optional neighborhood emergency ties.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = userSafeCircle.map(m => `
+                <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-md space-y-4 relative">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-11 h-11 rounded-full bg-wild-berry text-ivory-cream font-black flex items-center justify-center font-display text-base">
+                                ${escapeHtml(m.name.charAt(0).toUpperCase())}
+                            </div>
+                            <div>
+                                <h4 class="font-black text-base text-wild-berry">${escapeHtml(m.name)}</h4>
+                                <p class="text-xs font-bold text-wild-berry/60">${escapeHtml(m.role)} (${escapeHtml(m.group)})</p>
+                            </div>
+                        </div>
+                        <span class="bg-powder-blue text-wild-berry text-xs font-black px-3 py-1 rounded-full border border-cool-mist">${escapeHtml(m.status)}</span>
+                    </div>
+                    <div class="text-xs font-bold text-wild-berry/80 space-y-1.5 border-t-2 border-ivory-cream pt-3">
+                        <div class="flex justify-between"><span>Location:</span> <span class="font-black text-wild-berry">${escapeHtml(m.location)}</span></div>
+                        <div class="flex justify-between"><span>Last Check-In:</span> <span class="font-black text-wild-berry">${escapeHtml(m.lastCheckin)}</span></div>
+                    </div>
+                    <button onclick="removeMember(${m.id})" class="w-full mt-2 bg-rose-taupe/40 hover:bg-rose-taupe text-wild-berry font-black text-[11px] py-1.5 rounded-lg transition cursor-pointer">
+                        Remove Contact
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Community Forum Board Logic
+        function handlePostCommunityNews(e) {
+            e.preventDefault();
+            const title = document.getElementById('postTitleInput').value.trim();
+            const category = document.getElementById('postCategoryInput').value;
+            const content = document.getElementById('postContentInput').value.trim();
+
+            if (!title || !content) return;
+
+            const newPost = {
+                id: Date.now(),
+                zipCode: activeZipGroup,
+                author: currentUser ? (currentUser.email || "Verified Resident") : "Community Resident",
+                category,
+                title,
+                content,
+                timestamp: "Just now"
+            };
+
+            communityPosts.unshift(newPost);
+            
+            document.getElementById('postTitleInput').value = '';
+            document.getElementById('postContentInput').value = '';
+
+            renderCommunityFeed();
+        }
+
+        function renderCommunityFeed() {
+            const feed = document.getElementById('communityFeedList');
+            if (!feed) return;
+
+            let filtered = communityPosts;
+            if (activeFeedFilter === 'current') {
+                filtered = communityPosts.filter(p => p.zipCode === activeZipGroup);
+            }
+
+            if (filtered.length === 0) {
+                feed.innerHTML = `
+                    <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-8 text-center space-y-2 shadow-sm">
+                        <p class="font-black text-sm text-wild-berry">No Updates Published in Zip Code ${escapeHtml(activeZipGroup)}</p>
+                        <p class="text-xs font-bold text-wild-berry/70">Be the first to publish a safety notice or news update for this group above!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            feed.innerHTML = filtered.map(post => `
+                <div class="bg-pure-white border-2 border-cool-mist/50 rounded-2xl p-6 shadow-sm space-y-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-ivory-cream pb-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-wild-berry text-ivory-cream text-[10px] font-black uppercase px-2.5 py-1 rounded-md font-mono">ZIP ${escapeHtml(post.zipCode)}</span>
+                            <span class="bg-powder-blue text-wild-berry text-[10px] font-black uppercase px-2.5 py-1 rounded-md border border-cool-mist">${escapeHtml(post.category)}</span>
+                            <h5 class="font-black text-sm text-wild-berry">${escapeHtml(post.title)}</h5>
+                        </div>
+                        <span class="text-[11px] font-bold text-wild-berry/60">${escapeHtml(post.author)} • ${escapeHtml(post.timestamp)}</span>
+                    </div>
+                    <p class="text-xs font-bold text-wild-berry/80 leading-relaxed pt-1">${escapeHtml(post.content)}</p>
+                </div>
+            `).join('');
+        }
+
+        // 3D Digital Twin Simulation Animation Logic
+        const twinScenarios = {
+            wildfire: {
+                steps: [
+                    { time: "T + 0 Hours (Baseline)", desc: "Initial ignition detected. Boundary containment at 85%. Normal wind conditions." },
+                    { time: "T + 12 Hours (Evolving)", desc: "Wind shift accelerates ember dispersal. Containment drops to 60%. Secondary zone alert." },
+                    { time: "T + 24 Hours (Peak)", desc: "Thermal plume reaches maximum atmospheric height. Regional evacuation protocol triggered." },
+                    { time: "T + 72 Hours (Mitigated)", desc: "Favorable humidity recovery. Perimeter established by suppression teams." }
+                ]
+            },
+            flood: {
+                steps: [
+                    { time: "T + 0 Hours (Baseline)", desc: "Atmospheric river landfall. Watershed absorption capacity at 90%." },
+                    { time: "T + 12 Hours (Evolving)", desc: "Soil saturation reached. Localized riverbed overflow into low-elevation zones." },
+                    { time: "T + 24 Hours (Peak)", desc: "Peak inundation crest. Hydro-barriers deployed across municipal transit channels." },
+                    { time: "T + 72 Hours (Mitigated)", desc: "Precipitation recedes. Main channel flow rates normalizing." }
+                ]
+            },
+            reservoir: {
+                steps: [
+                    { time: "T + 0 Hours (Baseline)", desc: "Reservoir storage capacity at 68% nominal capacity." },
+                    { time: "T + 12 Hours (Evolving)", desc: "Extended thermal stress increases daily evaporation rate by 12%." },
+                    { time: "T + 24 Hours (Peak)", desc: "Agricultural drawdown increases grid strain. Conservation Stage 2 recommended." },
+                    { time: "T + 72 Hours (Mitigated)", desc: "Targeted conservation shifts baseline draw back to equilibrium." }
+                ]
+            },
+            coastal: {
+                steps: [
+                    { time: "T + 0 Hours (Baseline)", desc: "Coastal bluff erosion baseline monitored via satellite lidar." },
+                    { time: "T + 12 Hours (Evolving)", desc: "High tide storm surge aligns with swell period, intensifying wave impact." },
+                    { time: "T + 24 Hours (Peak)", desc: "Cliffside displacement of 2.4 meters recorded across unreinforced bluffs." },
+                    { time: "T + 72 Hours (Mitigated)", desc: "Surge passes. Stabilization structures re-evaluated." }
+                ]
+            },
+            drought: {
+                steps: [
+                    { time: "T + 0 Hours (Baseline)", desc: "Soil moisture deficit at moderate anomaly thresholds." },
+                    { time: "T + 12 Hours (Evolving)", desc: "Deep root zone moisture drops 8% over sustained heatwave window." },
+                    { time: "T + 24 Hours (Peak)", desc: "NDVI vegetation stress index indicates severe canopy dryness." },
+                    { time: "T + 72 Hours (Mitigated)", desc: "Targeted agricultural drip recycling alleviates stress zones." }
+                ]
+            }
+        };
+
+        function updateDigitalTwinScenario() {
+            resetTwinAnimation();
+        }
+
+        function setTwinStep(stepIndex) {
+            const scenarioKey = document.getElementById('twinScenarioSelect').value;
+            const scenario = twinScenarios[scenarioKey] || twinScenarios.wildfire;
+            const stepData = scenario.steps[stepIndex] || scenario.steps[0];
+
+            document.getElementById('twinTimelineLabel').innerText = `TIMESTAMP: ${stepData.time}`;
+            document.getElementById('twinStatusDescription').innerText = stepData.desc;
+            
+            const pulse = document.getElementById('twinPulseRing');
+            if (pulse) {
+                const size = 16 + (stepIndex * 12);
+                pulse.style.width = `${size}rem`;
+                pulse.style.height = `${size}rem`;
+            }
+        }
+
+        function toggleTwinAnimation() {
+            const playBtn = document.getElementById('twinPlayBtn');
+            if (twinAnimationTimer) {
+                clearInterval(twinAnimationTimer);
+                twinAnimationTimer = null;
+                playBtn.innerText = "Play Simulation";
+            } else {
+                playBtn.innerText = "Pause Simulation";
+                twinAnimationTimer = setInterval(() => {
+                    const slider = document.getElementById('twinSlider');
+                    let nextVal = (parseInt(slider.value) + 1) % 4;
+                    slider.value = nextVal;
+                    setTwinStep(nextVal);
+                }, 2000);
+            }
+        }
+
+        function resetTwinAnimation() {
+            if (twinAnimationTimer) {
+                clearInterval(twinAnimationTimer);
+                twinAnimationTimer = null;
+            }
+            document.getElementById('twinPlayBtn').innerText = "Play Simulation";
+            document.getElementById('twinSlider').value = 0;
+            setTwinStep(0);
+        }
+
+        function renderTrendArchive() {
+            const selectVal = document.getElementById('trendVectorSelect').value;
+            alert(`Querying historical satellite telemetry for [${selectVal}]. Display refreshed with latest archival delta logs.`);
+        }
 
         // Dynamic Preparedness Data
         const prepData = {
@@ -843,7 +1480,6 @@
             }
         };
 
-        // Render Preparedness Category
         function switchPrepCategory(catKey) {
             const data = prepData[catKey];
             if (!data) return;
@@ -870,7 +1506,6 @@
             `;
         }
 
-        // Toggle Dashboard View
         function toggleDashView(viewMode) {
             const indBtn = document.getElementById('viewIndividualBtn');
             const comBtn = document.getElementById('viewCommunityBtn');
@@ -881,20 +1516,6 @@
             } else {
                 comBtn.className = "px-5 py-2.5 rounded-xl bg-wild-berry text-ivory-cream font-black transition cursor-pointer";
                 indBtn.className = "px-5 py-2.5 rounded-xl text-wild-berry/70 hover:text-wild-berry font-black transition cursor-pointer";
-            }
-        }
-
-        // Toggle Safe Circle Group
-        function switchSafeCircleGroup(groupType) {
-            const famBtn = document.getElementById('groupFamilyBtn');
-            const neighBtn = document.getElementById('groupNeighborsBtn');
-
-            if (groupType === 'family') {
-                famBtn.className = "px-5 py-2.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer";
-                neighBtn.className = "px-5 py-2.5 rounded-lg text-wild-berry hover:bg-ivory-cream transition cursor-pointer";
-            } else {
-                neighBtn.className = "px-5 py-2.5 rounded-lg bg-wild-berry text-ivory-cream transition cursor-pointer";
-                famBtn.className = "px-5 py-2.5 rounded-lg text-wild-berry hover:bg-ivory-cream transition cursor-pointer";
             }
         }
 
@@ -909,7 +1530,7 @@
             if (checkinTime) {
                 checkinTime.innerText = "Just now (Broadcast Sent)";
             }
-            alert("Status Update Sent: All members in your Safe Circle have been notified that you are safe.");
+            alert("Status Update Sent: Safe Circle broadcasts updated successfully.");
         }
 
         // Auth Logic
@@ -1077,7 +1698,10 @@
         document.addEventListener("DOMContentLoaded", () => {
             switchPrepCategory('water');
             initAuth();
+            renderSafeCircleMembers();
+            renderCommunityFeed();
             navigateTo(window.location.pathname);
+            setTwinStep(0);
         });
 
         // Mode 1: Regional Evaluation Form
@@ -1093,6 +1717,12 @@
                 alert("Geographical Restriction Violation: Please insert a 5-digit US Zip Code.");
                 return;
             }
+
+            activeZipGroup = zipVal;
+            const zipInput = document.getElementById('zipGroupInput');
+            if (zipInput) zipInput.value = zipVal;
+            const groupBadge = document.getElementById('activeGroupBadge');
+            if (groupBadge) groupBadge.innerText = `ZIP ${zipVal}`;
 
             evalBtn.disabled = true;
             evalBtn.innerHTML = `<span class="animate-spin border-2 border-ivory-cream border-t-transparent rounded-full w-5 h-5 mr-2 inline-block"></span> Analyzing Data Pipeline...`;
@@ -1161,6 +1791,8 @@
                         nasaFeed.innerHTML = `<p class="text-wild-berry/60 italic text-xs">No active wildfire or environmental shifts detected in satellite logs.</p>`;
                     }
                 }
+
+                renderCommunityFeed();
 
             } catch (err) {
                 alert(`Pipeline Execution Error: ${err.message}`);
